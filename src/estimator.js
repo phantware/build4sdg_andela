@@ -6,11 +6,11 @@ const computeInfectionsByRequestedTime = (
   let factor;
   const periodType = pType.toLowerCase();
   if (periodType === 'days') {
-    factor = Math.floor(2 ** (1 / 3));
+    factor = 2 ** ((1 / 3) * periodDuration);
   } else if (periodType === 'weeks') {
-    factor = Math.floor(2 ** (1 / 3) * periodDuration * 7);
+    factor = 2 ** ((1 / 3) * periodDuration * 7);
   } else if (periodType === 'months') {
-    factor = Math.floor(2 ** (1 / 3) * periodDuration * 30);
+    factor = 2 ** ((1 / 3) * periodDuration * 30);
   } else {
     factor = 'unknown period';
   }
