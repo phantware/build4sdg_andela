@@ -1,16 +1,16 @@
 const computeInfectionsByRequestedTime = (
   currentlyInfected,
-  periodDuration,
+  timeToElapse,
   pType
 ) => {
   let factor;
   const periodType = pType.toLowerCase();
   if (periodType === 'days') {
-    factor = 2 ** (1 / 3);
+    factor = 2 ** ((1 / 3) * timeToElapse);
   } else if (periodType === 'weeks') {
-    factor = 2 ** ((1 / 3) * periodDuration * 7);
+    factor = 2 ** ((1 / 3) * timeToElapse * 7);
   } else if (periodType === 'months') {
-    factor = 2 ** ((1 / 3) * periodDuration * 30);
+    factor = 2 ** ((1 / 3) * timeToElapse * 30);
   } else {
     factor = 'unknown period';
   }
