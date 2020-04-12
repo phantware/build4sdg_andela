@@ -6,7 +6,7 @@ const computeInfectionsByRequestedTime = (
   let factor;
   const periodType = pType.toLowerCase();
   if (periodType === 'days') {
-    factor = Math.floor(2 ** (1 / 3) * periodDuration);
+    factor = Math.floor(2 ** (1 / 3));
   } else if (periodType === 'weeks') {
     factor = Math.floor(2 ** (1 / 3) * periodDuration * 7);
   } else if (periodType === 'months') {
