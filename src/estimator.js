@@ -1,49 +1,26 @@
-const computeInfectionsByRequestedTime = (
-  currentlyInfected,
-  timeToElapse,
-  pType
-) => {
-  let factor;
-  const periodType = pType.toLowerCase();
-  if (periodType === 'days') {
-    factor = 2 ** ((1 / 3) * timeToElapse);
-  } else if (periodType === 'weeks') {
-    factor = 2 ** ((1 / 3) * timeToElapse * 7);
-  } else if (periodType === 'months') {
-    factor = 2 ** ((1 / 3) * timeToElapse * 30);
-  } else {
-    factor = 'unknown period';
-  }
-  return typeof factor === 'string' ? factor : currentlyInfected * factor;
-};
-
 const covid19ImpactEstimator = (data) => {
-  const { reportedCases, periodType, timeToElapse } = data;
+  let factor;
+  const periodDuration = data.timeToElapse;
+  const impact = {};
+  const severeImpact = {};
+  if (data.periodType === 'days') {
+    factor = Math.floor(periodDuration / 3);
+  } else if (data.periodType === 'weeks') {
+    factor = Math.floor((7 * periodDuration) / 3);
+  } else if (data.periodType === 'month') {
+    factor = Math.floor((30 * periodDuration) / 3);
+  }
+  impact.currentlyInfacted = data.reportedCases * 10;
+  severeImpact.currentlyInfacted = data.reportedCases * 50;
+  impact.infectionByRequestedTime = data.reportedCases * 2 ** factor;
+  severeImpact.infectionByRequestedTime = data.reportedCases * 2 ** factor;
 
-  const currentlyInfectedImpact = reportedCases * 10;
-  const currentlyInfectedSevereImpact = reportedCases * 50;
-  const infectionsByRequestedTimeImpact = computeInfectionsByRequestedTime(
-    currentlyInfectedImpact,
-    timeToElapse,
-    periodType
-  );
-  const infectionsByRequestedTimeSevereImpact = computeInfectionsByRequestedTime(
-    currentlyInfectedSevereImpact,
-    timeToElapse,
-    periodType
-  );
-
-  return {
+  const output = {
     data,
-    impact: {
-      currentlyInfected: currentlyInfectedImpact,
-      infectionsByRequestedTime: infectionsByRequestedTimeImpact
-    },
-    severeImpact: {
-      currentlyInfected: currentlyInfectedSevereImpact,
-      infectionsByRequestedTime: infectionsByRequestedTimeSevereImpact
-    }
+    impact,
+    severeImpact
   };
+  return output;
 };
 
 export default covid19ImpactEstimator;
