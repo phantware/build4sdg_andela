@@ -71,7 +71,11 @@ app.get('/api/v1/on-covid-19', (req, res) => {
 app.get('/api/v1/on-covid-19/logs', async (req, res) => {
   const logs = await pool.query('SELECT * FROM  logs');
   let logStr = '';
-  logs.rows.forEach(({ method, url, status, log_time }) => {
+  logs.rows.forEach((
+    {
+      method, url, status, log_time
+    }
+  ) => {
     logStr += `${method} ${url} ${status} ${log_time}ms\n`;
   });
   res.status(200).send(logStr);
