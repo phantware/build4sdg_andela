@@ -80,5 +80,5 @@ app.get('/api/v1/on-covid-19/logs', async (req, res) => {
 const port = process.env.PORT || 5050;
 
 app.listen(port, () => {
-  console.log(`listening on ${port}...`);
+  console.log(`listening on ${port}.....`);
 });
