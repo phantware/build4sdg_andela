@@ -6,7 +6,7 @@
   "private": false,
   "scripts": {
     "lint": "eslint ./src/",
-    "start": "node ./build/server.js",
+    "start": "node ./build/backend/app.js ",
     "build": "babel src -d build --verbose",
     "start:dev": "nodemon -x npx  babel-node src/backend/app.js"
   },
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
+    "@babel/cli": "^7.8.4",
     "@babel/preset-env": "^7.9.0",
     "babel-jest": "^25.2.0",
     "eslint": "^6.8.0",
