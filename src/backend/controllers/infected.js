@@ -1,4 +1,7 @@
-import xml from 'xml';
+/* eslint-disable object-curly-newline */
+/* eslint-disable camelcase */
+// import xml from 'xml';
+import jsonToXml from 'jsontoxml';
 import pool from '../db';
 import estimator from '../../estimator';
 
@@ -28,7 +31,11 @@ class Data {
 
     const resData = estimator(data);
 
-    res.status(200).send(resData);
+    res.status(200).json({
+      data: resData.data,
+      impact: resData.impact,
+      severeImpact: resData.severeImpact
+    });
     const endTime = Date.now();
 
     const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
@@ -65,7 +72,11 @@ class Data {
 
       const resData = estimator(data);
 
-      res.status(200).send(resData);
+      res.status(200).json({
+        data: resData.data,
+        impact: resData.impact,
+        severeImpact: resData.severeImpact
+      });
       const endTime = Date.now();
 
       const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
@@ -97,8 +108,8 @@ class Data {
       };
 
       const resData = estimator(data);
-
-      res.status(200).send(resData);
+      res.header('content-Type', 'application/xml; charset=UTF-8');
+      res.send(jsonToXml(resData));
       const endTime = Date.now();
 
       const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
@@ -107,6 +118,15 @@ class Data {
         reqLog
       );
     }
+  }
+
+  static async getLogs(req, res) {
+    const logs = await pool.query('SELECT * FROM  logs');
+    let logStr = '';
+    logs.rows.forEach(({ method, url, status, log_time }) => {
+      logStr += `${method} ${url} ${status} ${log_time}ms\n`;
+    });
+    res.status(200).send(logStr);
   }
 }
 
