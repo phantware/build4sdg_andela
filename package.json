@@ -6,9 +6,11 @@
   "private": false,
   "scripts": {
     "lint": "eslint ./src/",
-    "start:dev": "nodemon -x npx  babel-node src/backend/app.js  "
+    "start": "nodemon -x npx  babel-node src/backend/app.js",
+    "start:dev": "nodemon -x npx  babel-node src/backend/app.js"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "on-covid-19": "^0.1.3",
