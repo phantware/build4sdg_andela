@@ -45,79 +45,78 @@ class Data {
     );
   }
 
-  static async patientRecordLogs(req, res) {
-    const { type } = req.params;
-    if (type === 'json') {
-      const startTime = Date.now();
-      const {
-        periodType,
-        timeToElapse,
-        reportedCases,
-        population,
-        totalHospitalBeds
-      } = req.body;
-      const data = {
-        region: {
-          name: 'Africa',
-          avgAge: 19.7,
-          avgDailyIncomeInUSD: 5,
-          avgDailyIncomePopulation: 0.71
-        },
-        periodType,
-        timeToElapse,
-        reportedCases,
-        population,
-        totalHospitalBeds
-      };
+  static async patientRecordJson(req, res) {
+    const startTime = Date.now();
+    const {
+      periodType,
+      timeToElapse,
+      reportedCases,
+      population,
+      totalHospitalBeds
+    } = req.body;
+    const data = {
+      region: {
+        name: 'Africa',
+        avgAge: 19.7,
+        avgDailyIncomeInUSD: 5,
+        avgDailyIncomePopulation: 0.71
+      },
+      periodType,
+      timeToElapse,
+      reportedCases,
+      population,
+      totalHospitalBeds
+    };
 
-      const resData = estimator(data);
+    const resData = estimator(data);
 
-      res.status(200).json({
-        data: resData.data,
-        impact: resData.impact,
-        severeImpact: resData.severeImpact
-      });
-      const endTime = Date.now();
+    res.status(200).json({
+      data: resData.data,
+      impact: resData.impact,
+      severeImpact: resData.severeImpact
+    });
+    const endTime = Date.now();
 
-      const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
-      pool.query(
-        'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
-        reqLog
-      );
-    } else if (type === 'xml') {
-      const startTime = Date.now();
-      const {
-        periodType,
-        timeToElapse,
-        reportedCases,
-        population,
-        totalHospitalBeds
-      } = req.body;
-      const data = {
-        region: {
-          name: 'Africa',
-          avgAge: 19.7,
-          avgDailyIncomeInUSD: 5,
-          avgDailyIncomePopulation: 0.71
-        },
-        periodType,
-        timeToElapse,
-        reportedCases,
-        population,
-        totalHospitalBeds
-      };
+    const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
+    pool.query(
+      'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
+      reqLog
+    );
+  }
 
-      const resData = estimator(data);
-      res.header('content-Type', 'application/xml; charset=UTF-8');
-      res.send(jsonToXml(resData));
-      const endTime = Date.now();
+  static async patientRecordXml(req, res) {
+    const startTime = Date.now();
+    const {
+      periodType,
+      timeToElapse,
+      reportedCases,
+      population,
+      totalHospitalBeds
+    } = req.body;
+    const data = {
+      region: {
+        name: 'Africa',
+        avgAge: 19.7,
+        avgDailyIncomeInUSD: 5,
+        avgDailyIncomePopulation: 0.71
+      },
+      periodType,
+      timeToElapse,
+      reportedCases,
+      population,
+      totalHospitalBeds
+    };
 
-      const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
-      pool.query(
-        'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
-        reqLog
-      );
-    }
+    const resData = estimator(data);
+    res.header('content-Type', 'application/xml; charset=UTF-8');
+    res.send(jsonToXml(resData));
+    const endTime = Date.now();
+
+    const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
+    pool.query(
+      'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
+      reqLog
+    );
   }
 
   static async getLogs(req, res) {

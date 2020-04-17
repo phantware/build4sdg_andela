@@ -9,11 +9,15 @@ router.post(
   patientRecordController.patientRecord
 );
 router.post(
-  '/api/v1/on-covid-19/logs/:type/',
-  patientRecordMiddleware.patientRecordLogs,
-  patientRecordController.patientRecordLogs
+  '/api/v1/on-covid-19/json',
+  patientRecordMiddleware.patientRecordJson,
+  patientRecordController.patientRecordJson
 );
-
+router.post(
+  '/api/v1/on-covid-19/xml',
+  patientRecordMiddleware.patientRecordXml,
+  patientRecordController.patientRecordXml
+);
 router.get('/api/v1/on-covid-19/logs', patientRecordController.getLogs);
 
 export default router;
