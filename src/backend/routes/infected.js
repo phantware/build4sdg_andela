@@ -4,12 +4,12 @@ import patientRecordMiddleware from '../middleware/infected';
 
 const router = express.Router();
 router.post(
-  '/api/v1/on-covid-19',
+  '/api/v1/on-covid-19/',
   patientRecordMiddleware.patientRecord,
   patientRecordController.patientRecord
 );
 router.post(
-  '/api/v1/on-covid-19/logs/:type',
+  '/api/v1/on-covid-19/logs/:type/',
   patientRecordMiddleware.patientRecordLogs,
   patientRecordController.patientRecordLogs
 );
