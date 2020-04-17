@@ -6,7 +6,8 @@
   "private": false,
   "scripts": {
     "lint": "eslint ./src/",
-    "start": "nodemon -x npx  babel-node src/backend/app.js",
+    "start": "node ./build/server.js",
+    "build": "babel src -d build --verbose",
     "start:dev": "nodemon -x npx  babel-node src/backend/app.js"
   },
   "dependencies": {
