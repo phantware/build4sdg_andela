@@ -4,7 +4,7 @@
 import jsonToXml from 'jsontoxml';
 import fs from 'fs';
 import path from 'path';
-import pool from '../db';
+// import pool from '../db';
 import estimator from '../../estimator';
 
 class Data {
