@@ -5,7 +5,7 @@ import patientRouter from './routes/infected';
 
 const app = express();
 app.use(express.json());
-app.use('/api/v1/on-covid-19', patientRouter);
+app.use(patientRouter);
 
 app.get('/api/v1/on-covid-19', (req, res) => {
   res.status(200).send({
