@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
 import express from 'express';
-import xml from 'xml';
-import pool from './db';
 
 import patientRouter from './routes/infected';
 
