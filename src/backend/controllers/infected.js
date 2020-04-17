@@ -46,7 +46,7 @@ class Data {
   }
 
   static async patientRecordJson(req, res) {
-    const startTime = Date.now();
+    // const startTime = Date.now();
     const {
       periodType,
       timeToElapse,
@@ -75,17 +75,17 @@ class Data {
       impact: resData.impact,
       severeImpact: resData.severeImpact
     });
-    const endTime = Date.now();
+    // const endTime = Date.now();
 
-    const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
-    pool.query(
-      'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
-      reqLog
-    );
+    // const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
+    // pool.query(
+    //   'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
+    //   reqLog
+    // );
   }
 
   static async patientRecordXml(req, res) {
-    const startTime = Date.now();
+    // const startTime = Date.now();
     const {
       periodType,
       timeToElapse,
@@ -110,13 +110,13 @@ class Data {
     const resData = estimator(data);
     res.header('content-Type', 'application/xml; charset=UTF-8');
     res.send(jsonToXml(resData));
-    const endTime = Date.now();
+    // const endTime = Date.now();
 
-    const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
-    pool.query(
-      'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
-      reqLog
-    );
+    // const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
+    // pool.query(
+    //   'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
+    //   reqLog
+    // );
   }
 
   static async getLogs(req, res) {

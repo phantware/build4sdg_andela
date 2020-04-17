@@ -17,6 +17,6 @@ router.post(
   patientRecordMiddleware.patientRecordXml,
   patientRecordController.patientRecordXml
 );
-router.get('/api/v1/on-covid-19/logs', patientRecordController.getLogs);
+router.get('/logs', patientRecordController.getLogs);
 
 export default router;
