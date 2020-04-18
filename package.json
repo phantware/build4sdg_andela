@@ -5,7 +5,9 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "lint": "eslint ./src/"
+    "lint": "eslint ./src/",
+    "start": "node ./build/backend/app.js",
+    "build": "babel src -d build --verbose"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
