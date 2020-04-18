@@ -39,6 +39,6 @@ app.post('/api/v1/on-covid-19/xml', async (req, res) => {
 });
 
 const port = process.env.PORT || 5050;
-module.exports = app.listen(port, () =>
+module.exports = app.listen(port, () => {
   // console.log(`Server running on port ${port} 🔥`)
-);
+});
