@@ -4,7 +4,6 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import jsonToXml from 'jsontoxml';
-// import fs from 'fs';
 import estimatorData from '../estimator';
 
 const app = express();
@@ -39,15 +38,7 @@ app.post('/api/v1/on-covid-19/xml', async (req, res) => {
   res.send(jsonToXml(use));
 });
 
-// app.get('/api/v1/on-covid-19/logs?', async (req, res) {
-//   fs.readFile('.logger.log', 'utf8', (err, data) => {
-//     if(err) throw err;
-//     res.set('Conttent-Type', 'text/plain')
-//     res.send();
-//   })
-// })
-
 const port = process.env.PORT || 5050;
 module.exports = app.listen(port, () =>
-  console.log(`Server running on port ${port} 🔥`)
+  // console.log(`Server running on port ${port} 🔥`)
 );
