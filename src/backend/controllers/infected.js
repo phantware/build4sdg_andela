@@ -35,11 +35,6 @@ class Data {
 
     const resData = estimator(data);
 
-    res.status(200).json({
-      data: resData.data,
-      impact: resData.impact,
-      severeImpact: resData.severeImpact
-    });
     const endTime = Date.now();
 
     const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
@@ -47,6 +42,11 @@ class Data {
       'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
       reqLog
     );
+    return res.status(200).json({
+      data: resData.data,
+      impact: resData.impact,
+      severeImpact: resData.severeImpact
+    });
   }
 
   static async patientRecordJson(req, res) {
@@ -76,7 +76,6 @@ class Data {
 
     const resData = estimator(data);
 
-    res.status(200).json(resData);
     const endTime = Date.now();
 
     const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
@@ -84,6 +83,8 @@ class Data {
       'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
       reqLog
     );
+
+    return res.status(200).json(resData);
   }
 
   static async patientRecordXml(req, res) {
@@ -112,8 +113,7 @@ class Data {
     };
 
     const resData = estimator(data);
-    res.set('Content-Type', 'application/xml');
-    res.send(jsonToXml(resData));
+
     const endTime = Date.now();
 
     const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
@@ -121,6 +121,8 @@ class Data {
       'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
       reqLog
     );
+    res.set('Content-Type', 'application/xml');
+    return res.send(jsonToXml(resData));
   }
 
   static async getLogs(req, res) {
