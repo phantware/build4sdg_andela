@@ -10,30 +10,7 @@ import estimator from '../../estimator';
 class Data {
   static async patientRecord(req, res) {
     const startTime = Date.now();
-    const {
-      avgDailyIncomeInUSD,
-      avgDailyIncomePopulation,
-      periodType,
-      timeToElapse,
-      reportedCases,
-      population,
-      totalHospitalBeds
-    } = req.body;
-    const data = {
-      region: {
-        name: 'Africa',
-        avgAge: 19.7,
-        avgDailyIncomeInUSD,
-        avgDailyIncomePopulation
-      },
-      periodType,
-      timeToElapse,
-      reportedCases,
-      population,
-      totalHospitalBeds
-    };
-
-    const resData = estimator(data);
+    const resData = estimator(req.body);
 
     const endTime = Date.now();
 
@@ -51,30 +28,8 @@ class Data {
 
   static async patientRecordJson(req, res) {
     const startTime = Date.now();
-    const {
-      avgDailyIncomeInUSD,
-      avgDailyIncomePopulation,
-      periodType,
-      timeToElapse,
-      reportedCases,
-      population,
-      totalHospitalBeds
-    } = req.body;
-    const data = {
-      region: {
-        name: 'Africa',
-        avgAge: 19.7,
-        avgDailyIncomeInUSD,
-        avgDailyIncomePopulation
-      },
-      periodType,
-      timeToElapse,
-      reportedCases,
-      population,
-      totalHospitalBeds
-    };
 
-    const resData = estimator(data);
+    const resData = estimator(req.body);
 
     const endTime = Date.now();
 
@@ -89,30 +44,7 @@ class Data {
 
   static async patientRecordXml(req, res) {
     const startTime = Date.now();
-    const {
-      avgDailyIncomeInUSD,
-      avgDailyIncomePopulation,
-      periodType,
-      timeToElapse,
-      reportedCases,
-      population,
-      totalHospitalBeds
-    } = req.body;
-    const data = {
-      region: {
-        name: 'Africa',
-        avgAge: 19.7,
-        avgDailyIncomeInUSD,
-        avgDailyIncomePopulation
-      },
-      periodType,
-      timeToElapse,
-      reportedCases,
-      population,
-      totalHospitalBeds
-    };
-
-    const resData = estimator(data);
+    const resData = estimator(req.body);
 
     const endTime = Date.now();
 
@@ -126,15 +58,6 @@ class Data {
   }
 
   static async getLogs(req, res) {
-    // try {
-    //   const logs = fs.readFileSync(path.join(__dirname, 'logs.txt'), {
-    //     encoding: 'utf-8'
-    //   });
-    //   res.type('text/plain');
-    //   return res.status(200).send(logs);
-    // } catch (error) {
-    //   throw new Error('Error reading log file');
-    // }
     const logs = await pool.query('SELECT * FROM  logs');
     let logStr = '';
     logs.rows.forEach(({ method, url, status, log_time }) => {
