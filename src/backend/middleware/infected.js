@@ -5,16 +5,16 @@ class PatientRecordValidation {
   static async patientRecord(req, res, next) {
     const schema = Joi.object({
       region: {
-        name: Joi.string().trim().lowercase().required(),
+        name: Joi.string().trim().required(),
         avgAge: Joi.number().required(),
         avgDailyIncomeInUSD: Joi.number().required(),
         avgDailyIncomePopulation: Joi.number().required()
       },
-      periodType: Joi.string().min(3).max(10).trim().lowercase().required(),
-      timeToElapse: Joi.number().min(1).required(),
-      reportedCases: Joi.number().min(1).required(),
-      population: Joi.number().min(1).required(),
-      totalHospitalBeds: Joi.number().min(1).required()
+      periodType: Joi.string().required(),
+      timeToElapse: Joi.number().required(),
+      reportedCases: Joi.number().required(),
+      population: Joi.number().required(),
+      totalHospitalBeds: Joi.number().required()
     });
     const { error, value } = schema.validate(req.body, { abortEarly: false });
     if (error) {
@@ -28,16 +28,16 @@ class PatientRecordValidation {
   static async patientRecordJson(req, res, next) {
     const schema = Joi.object({
       region: {
-        name: Joi.string().trim().lowercase().required(),
+        name: Joi.string().trim().required(),
         avgAge: Joi.number().required(),
         avgDailyIncomeInUSD: Joi.number().required(),
         avgDailyIncomePopulation: Joi.number().required()
       },
-      periodType: Joi.string().min(3).max(10).trim().lowercase().required(),
-      timeToElapse: Joi.number().min(1).required(),
-      reportedCases: Joi.number().min(1).required(),
-      population: Joi.number().min(1).required(),
-      totalHospitalBeds: Joi.number().min(1).required()
+      periodType: Joi.string().required(),
+      timeToElapse: Joi.number().required(),
+      reportedCases: Joi.number().required(),
+      population: Joi.number().required(),
+      totalHospitalBeds: Joi.number().required()
     });
 
     const { error, value } = schema.validate(req.body, { abortEarly: false });
@@ -52,16 +52,16 @@ class PatientRecordValidation {
   static async patientRecordXml(req, res, next) {
     const schema = Joi.object({
       region: {
-        name: Joi.string().trim().lowercase().required(),
+        name: Joi.string().trim().required(),
         avgAge: Joi.number().required(),
         avgDailyIncomeInUSD: Joi.number().required(),
         avgDailyIncomePopulation: Joi.number().required()
       },
-      periodType: Joi.string().min(3).max(10).trim().lowercase().required(),
-      timeToElapse: Joi.number().min(1).required(),
-      reportedCases: Joi.number().min(1).required(),
-      population: Joi.number().min(1).required(),
-      totalHospitalBeds: Joi.number().min(1).required()
+      periodType: Joi.string().required(),
+      timeToElapse: Joi.number().required(),
+      reportedCases: Joi.number().required(),
+      population: Joi.number().required(),
+      totalHospitalBeds: Joi.number().required()
     });
     const { error, value } = schema.validate(req.body, { abortEarly: false });
     if (error) {
