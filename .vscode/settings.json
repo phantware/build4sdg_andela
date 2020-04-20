@@ -1,0 +1,25 @@
+{
+  "workbench.iconTheme": "file-icons-colourless",
+  "editor.wordWrap": "on",
+  "terminal.integrated.rendererType": "dom",
+  "terminal.integrated.lineHeight": 1.1,
+  "terminal.integrated.fontSize": 13,
+  "editor.formatOnSave": true,
+  "editor.fontFamily": "'Ubuntu Mono', monospace",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.autoSave": "afterDelay",
+  "rsp-ui.enableStartServerOnActivation": [
+    {
+      "id": "redhat.vscode-server-connector",
+      "name": "Red Hat RSP Server",
+      "startOnActivation": true
+    }
+  ],
+  "window.zoomLevel": 0,
+  "vsicons.dontShowNewVersionMessage": true,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "javascript.updateImportsOnFileMove.enabled": "always"
+}
