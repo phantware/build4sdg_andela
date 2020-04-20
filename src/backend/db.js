@@ -1,11 +1,12 @@
 import { Pool } from 'pg';
+import dotenv from 'dotenv';
 
-const connectionString = 'postgresql://postgres:postgres@localhost:5432/sdg_db';
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
+
+const { connectionString } = process.env;
 const pool = new Pool({ connectionString });
 
-// eslint-disable-next-line no-unused-vars
-pool.query('SELECT NOW()').then(({ rows: [time] }) => {
-  // console.log('connected to database', time);
-});
-
+pool.query('SELECT NOW()');
 export default pool;

@@ -14,7 +14,12 @@ class Data {
 
     const endTime = Date.now();
 
-    const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
+    const reqLog = [
+      req.method,
+      req.originalUrl,
+      res.statusCode,
+      endTime - startTime
+    ];
     pool.query(
       'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
       reqLog
@@ -33,7 +38,12 @@ class Data {
 
     const endTime = Date.now();
 
-    const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
+    const reqLog = [
+      req.method,
+      req.originalUrl,
+      res.statusCode,
+      endTime - startTime
+    ];
     pool.query(
       'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
       reqLog
@@ -48,7 +58,13 @@ class Data {
 
     const endTime = Date.now();
 
-    const reqLog = [req.method, req.url, res.statusCode, endTime - startTime];
+    const reqLog = [
+      req.method,
+      req.originalUrl,
+      res.statusCode,
+      endTime - startTime
+    ];
+
     pool.query(
       'insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *',
       reqLog
@@ -58,7 +74,22 @@ class Data {
   }
 
   static async getLogs(req, res) {
-    const logs = await pool.query('SELECT * FROM  logs');
+    const startTime = Date.now();
+    await pool.query('SELECT * FROM  logs');
+
+    const endTime = Date.now();
+
+    const reqLog = [
+      req.method,
+      req.originalUrl,
+      res.statusCode,
+      endTime - startTime
+    ];
+
+    const logs = await pool.query(
+      'with getlogs as (insert into logs(method,url,status,log_time) values($1,$2,$3,$4) returning *) select * from logs union all table getlogs;',
+      reqLog
+    );
     let logStr = '';
     logs.rows.forEach(({ method, url, status, log_time }) => {
       logStr += `${method} ${url} ${status} ${log_time}ms\n`;
