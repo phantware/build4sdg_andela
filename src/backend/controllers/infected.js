@@ -94,6 +94,7 @@ class Data {
     logs.rows.forEach(({ method, url, status, log_time }) => {
       logStr += `${method} ${url} ${status} ${log_time}ms\n`;
     });
+    res.type('text/plain');
     res.status(200).send(logStr);
   }
 }
